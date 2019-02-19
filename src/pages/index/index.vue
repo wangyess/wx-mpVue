@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="box-shadow">
-
+    
     </div>
     <div class="content">
       <div class="card"></div>
@@ -87,9 +87,9 @@ page {
 .box-shadow{
   width: 100%;
   height: 2rpx;
-  background: #f3f3f3;
+  background: #f1f1f1;
   position: fixed;
-  box-shadow: 0px 1px 4px 1px #ececec
+  box-shadow: 0px 1px 4px 1px #f1f1f1
 }
 .content {
   display: flex;
