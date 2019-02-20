@@ -28,8 +28,7 @@
     </div>
     <div class="box-shadow"></div>
     <div class="content">
-      <div
-        class="card"
+      <div class="card"
         v-for="user in users"
       >
         <div class="title">

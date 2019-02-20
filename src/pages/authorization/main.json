@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "悍刀行授权登陆"
+  "navigationBarTitleText": "悍刀行授权登陆",
+  "enablePullDownRefresh": false
 }
