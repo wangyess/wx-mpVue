@@ -63,30 +63,48 @@ export default {
     }
   },
   mounted () {
-    wx.login({
-      success (res) {
-        if (res.code) {
-          console.log(res)
-        }
-      }
-    })
-    this.get_data()
+    this.getUserInfo()
+    this.getSetting()
+    this.get_fly_data()
   },
   methods: {
-    get_data () {
-      var that = this
-      wx.request({
-        url: 'https://jsonplaceholder.typicode.com/users', // 仅为示例，并非真实的接口地址
-        method: 'GET',
-        dataType: 'json',
-        header: {
-          'content-type': 'application/json' // 默认值
-        },
+    getUserInfo () {
+      wx.login({
         success (res) {
-          that.users = res.data
-          console.log(that.users)
+          if (res.code) {
+            console.log(res)
+          }
+
+          wx.getUserInfo({
+            lang: 'zh_CN',
+            success (res) {
+              const userInfo = res.userInfo
+              console.log(userInfo)
+            }
+          })
         }
       })
+    },
+    // 查看权限
+    getSetting () {
+      wx.getSetting({
+        success (res) {
+          // 允许获取头像
+          console.log(res.authSetting['scope.userInfo'])
+          // res.authSetting = {
+          //   "scope.userInfo": true,
+          //   "scope.userLocation": true
+          // }
+        }
+      })
+    },
+    get_fly_data () {
+      this.$http.get('https://jsonplaceholder.typicode.com/users')
+        .then((res) => {
+          this.users = res
+          console.log(this.users)
+        })
+        .catch((err) => console.log(err))
     },
     addClass (index) {
       this.num = index

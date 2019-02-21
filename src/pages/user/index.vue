@@ -1,18 +1,27 @@
 <template>
   <div class="big-box">
     <div class="header-card">
-       <div class="header-img">
-           <img :src="user.userDetail.avatarUrl" alt="">
-       </div>
-       <div class="des-text"> 
-         <div class="item">
-           <p>{{user.userDetail.nickName}}</p>
-         </div>
-         <div class="item">
-           <p>{{user.userDetail.country}}{{user.userDetail.province}}{{user.userDetail.city}}</p>
-         </div>
-       </div>
+      <div class="header-img">
+        <img
+          :src="user.userDetail.avatarUrl"
+          alt=""
+        >
+      </div>
+      <div class="des-text">
+        <div class="item">
+          <p>{{user.userDetail.nickName}}</p>
+        </div>
+        <div class="item">
+          <p>{{user.userDetail.country}}{{user.userDetail.province}}{{user.userDetail.city}}</p>
+        </div>
+      </div>
     </div>
+    <button
+      class="btn-btn"
+      open-type="getPhoneNumber"
+      lang="zh_CN"
+      @getphonenumber="getPhoneNumber"
+    >获取手机号</button>
   </div>
 </template>
 
@@ -30,6 +39,9 @@ export default {
 
   },
   methods: {
+    getPhoneNumber (e) {
+      console.log(e)
+    },
     get_user_data () {
       var that = this
       wx.getStorage({
@@ -47,7 +59,7 @@ export default {
     tiao () {
       setTimeout(function () {
         var url = '../../pages/authorization/main'
-        wx.navigateTo({url})
+        wx.navigateTo({ url })
       }, 2000)
     }
   }
@@ -55,12 +67,12 @@ export default {
 </script>
 
 <style>
-.big-box{
+.big-box {
   display: flex;
-  flex-direction:column;
-  align-items:flex-start;
+  flex-direction: column;
+  align-items: flex-start;
 }
-.header-card{
+.header-card {
   width: 100%;
   height: 280rpx;
   padding: 40rpx 20rpx;
@@ -68,26 +80,26 @@ export default {
   background: white;
   box-sizing: border-box;
 }
-.header-img{
+.header-img {
   float: left;
   width: 200rpx;
   height: 200rpx;
   border-radius: 20rpx;
   overflow: hidden;
-  background: seagreen
+  background: seagreen;
 }
-.header-img img{
+.header-img img {
   width: 100%;
   height: 100%;
 }
-.des-text{
+.des-text {
   float: left;
   margin-left: 40rpx;
 }
-.des-text .item{
+.des-text .item {
   height: 100rpx;
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
