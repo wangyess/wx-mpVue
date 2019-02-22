@@ -28,7 +28,8 @@
     </div>
     <div class="box-shadow"></div>
     <div class="content">
-      <div class="card"
+      <div
+        class="card"
         v-for="user in users"
       >
         <div class="title">
@@ -50,24 +51,60 @@
         </div>
       </div>
     </div>
+    <div class="user-box">
+      <div class="user-detail">
+        <div class="user-Iofo">
+          <p @click="changeName">姓名 ：<span>{{name}}</span></p>
+          <p>年龄 ：<span>{{age}}</span>&nbsp;&nbsp;&nbsp;&nbsp; 性别 ：<span>{{sex}}</span></p>
+        </div>
+        <div class="user-des">
+          <p>{{zuoyouming}}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+
+const { mapState, mapGetters, mapMutations, mapActions } = createNamespacedHelpers('indexPage')
 
 export default {
   data () {
     return {
       num: 1,
-      users: []
+      users: [],
+      zuoyouming: null
     }
+  },
+  computed: {
+    ...mapState({
+      age: state => state.age,
+      name: state => state.name,
+      sex: state => state.sex
+    })
   },
   mounted () {
     this.getUserInfo()
     this.getSetting()
     this.get_fly_data()
+    this.zuoyouming = this.mergeText()
   },
   methods: {
+    ...mapGetters([
+      'mergeText'
+    ]),
+    ...mapMutations([
+      'ChineseName',
+      'EnglishName'
+    ]),
+    ...mapActions([
+      'switchName'
+    ]),
+    changeName () {
+      this.switchName()
+    },
     getUserInfo () {
       wx.login({
         success (res) {
@@ -189,8 +226,27 @@ export default {
   line-height: 1.5em;
   margin-top: 20rpx;
   text-align: justify;
-text-justify: newspaper;
-word-break: break-all;
+  text-justify: newspaper;
+  word-break: break-all;
   color: rgb(117, 117, 117);
+}
+.user-box {
+  margin: 0rpx 20rpx 40rpx;
+}
+.user-detail {
+  width: 100%;
+  font-size: 14px;
+  line-height: 1.5em;
+  padding: 10rpx 10rpx;
+  background: white;
+}
+.user-Iofo p {
+  color: rgb(105, 105, 105);
+}
+.user-Iofo p span {
+  color: rgb(68, 68, 68);
+}
+.user-des p {
+  color: rgb(105, 105, 105);
 }
 </style>

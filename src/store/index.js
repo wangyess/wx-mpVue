@@ -1,22 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import indexPage from './indexPage'
 Vue.use(Vuex)
 
-const state = {
-  name: 'wangye',
-  age: '24'
-}
-
-const getters = {
-  getName (state) {
-    return state.age
-  }
-}
-
 const store = new Vuex.Store({
-  state,
-  getters
+  strict: true,
+  modules: {
+    indexPage
+  }
 })
 
 export default store
