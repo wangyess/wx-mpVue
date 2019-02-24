@@ -1,6 +1,7 @@
 <template>
   <div>
      <p>{{logs}}</p>
+     <van-button type="danger">测试按钮</van-button>
   </div>
 </template>
 

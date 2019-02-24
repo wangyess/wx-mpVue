@@ -231,10 +231,9 @@ export default {
   color: rgb(117, 117, 117);
 }
 .user-box {
-  margin: 0rpx 20rpx 40rpx;
+  margin: 0rpx 20rpx 40rpx 20rpx;
 }
 .user-detail {
-  width: 100%;
   font-size: 14px;
   line-height: 1.5em;
   padding: 10rpx 10rpx;
