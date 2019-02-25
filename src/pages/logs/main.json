@@ -1,6 +1,9 @@
 {
   "navigationBarTitleText": "大学龙骑军",
   "usingComponents": {
-    "van-button": "/static/vant/button/index"
+    "van-button": "/static/vant/button/index",
+    "van-tab": "/static/vant/tab/index",
+    "van-tabs": "/static/vant/tabs/index",
+    "van-loading": "/static/vant/loading/index"
   }
 }
