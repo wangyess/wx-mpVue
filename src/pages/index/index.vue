@@ -11,7 +11,7 @@
         class="item"
         @click="addClass(2)"
       >
-        <p v-bind:class="[2==num ? 'active': 'defaultClass']">小泥人</p>
+        <p v-bind:class="[2==num ? 'active': 'defaultClass']" @click="goTheRouter">小泥人</p>
       </div>
       <div
         class="item"
@@ -30,7 +30,9 @@
     <div class="content">
       <div
         class="card"
-        v-for="user in users"
+        v-for="(user, index) in users"
+        :key="index"
+
       >
         <div class="title">
           <h4>{{user.username}}</h4>
@@ -105,6 +107,9 @@ export default {
     changeName () {
       this.switchName()
     },
+    goTheRouter () {
+      this.$router.push('/pages/authorization/main')
+    },
     getUserInfo () {
       wx.login({
         success (res) {
@@ -112,13 +117,13 @@ export default {
             console.log(res)
           }
 
-          wx.getUserInfo({
-            lang: 'zh_CN',
-            success (res) {
-              const userInfo = res.userInfo
-              console.log(userInfo)
-            }
-          })
+          // wx.getUserInfo({
+          //   lang: 'zh_CN',
+          //   success (res) {
+          //     const userInfo = res.userInfo
+          //     console.log(userInfo)
+          //   }
+          // })
         }
       })
     },
@@ -139,7 +144,6 @@ export default {
       this.$http.get('https://jsonplaceholder.typicode.com/users')
         .then((res) => {
           this.users = res
-          console.log(this.users)
         })
         .catch((err) => console.log(err))
     },

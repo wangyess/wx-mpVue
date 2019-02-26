@@ -1,21 +1,29 @@
 <template>
   <div>
-  <van-tabs
-    :active="active"
-    @change="onChange"
-    @disabled="onClickDisabled"
-  >
-    <van-tab title="热门小说">
-      <story />
-    </van-tab>
-    <van-tab title="本周天气">
-      <weather />
-    </van-tab>
-    <van-tab title="新闻资讯">
-      <news />
-    </van-tab>
-    <van-tab disabled title="搞笑视频">内容 4</van-tab>
-  </van-tabs>
+    <van-tabs
+      sticky
+      animated
+      swipeable
+      :scroll-top="scrollTop"
+      :active="active"
+      @change="onChange"
+      @disabled="onClickDisabled"
+    >
+      <van-tab title="热门小说">
+        <story />
+      </van-tab>
+      <van-tab title="本周天气">
+        <weather />
+      </van-tab>
+      <van-tab title="新闻资讯">
+        <news />
+      </van-tab>
+      <van-tab
+        disabled
+        title="搞笑视频"
+      >
+      </van-tab>
+    </van-tabs>
   </div>
 </template>
 
@@ -31,7 +39,8 @@ export default {
   },
   data () {
     return {
-      active: 0
+      active: 0,
+      scrollTop: 0
     }
   },
   methods: {
@@ -50,5 +59,7 @@ export default {
 </script>
 
 <style>
-
+.van-tabs__line {
+  background: rgb(182, 182, 182) !important;
+}
 </style>

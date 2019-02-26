@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/user/main",
     "pages/index/main",
     "pages/logs/main",
     "pages/counter/main",
-    "pages/user/main",
     "pages/authorization/main"
   ],
   "window": {
@@ -40,6 +40,5 @@
       }
     ],
     "position": "bottom"
-  },
-    "backgroundColor":"#2f2d2d"
+  }
 }

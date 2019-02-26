@@ -1,3 +1,8 @@
 {
-  "navigationBarTitleText": "大凉龙雀"
+  "navigationBarTitleText": "大凉龙雀",
+  "navigationBarBackgroundColor": "#494949",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "van-notice-bar": "/static/vant/notice-bar/index"
+  }
 }

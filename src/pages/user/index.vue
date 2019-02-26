@@ -1,27 +1,22 @@
 <template>
   <div class="big-box">
-    <div class="header-card">
-      <div class="header-img">
-        <img
-          :src="user.userDetail.avatarUrl"
+
+    <div class="notice-box">
+      <van-notice-bar text="有位非常漂亮的女同事，有天起晚了没有时间化妆便急忙冲到公司。结果那天她被记旷工了……吃惊" />
+    </div>
+
+    <div class="login-box">
+      <div class="login-img">
+        <img v-show="!login"
+          src="../../../static/images/handao.jpg"
           alt=""
         >
+        <img v-show="login" :src="user.userDetail.avatarUrl" alt="">
       </div>
-      <div class="des-text">
-        <div class="item">
-          <p>{{user.userDetail.nickName}}</p>
-        </div>
-        <div class="item">
-          <p>{{user.userDetail.country}}{{user.userDetail.province}}{{user.userDetail.city}}</p>
-        </div>
+      <div class="user-detail">
+          <p @click="routerTo">登陆</p>
       </div>
     </div>
-    <button
-      class="btn-btn"
-      open-type="getPhoneNumber"
-      lang="zh_CN"
-      @getphonenumber="getPhoneNumber"
-    >获取手机号</button>
   </div>
 </template>
 
@@ -29,7 +24,8 @@
 export default {
   data () {
     return {
-      user: {}
+      user: {},
+      login: false
     }
   },
   onShow () {
@@ -39,16 +35,19 @@ export default {
 
   },
   methods: {
-    getPhoneNumber (e) {
-      console.log(e)
+    routerTo () {
+      this.$router.push('/pages/authorization/main')
     },
     get_user_data () {
       var that = this
       wx.getStorage({
         key: 'userData',
         success (res) {
-          console.log(res.data)
-          that.user = res.data
+          if (res) {
+            console.log(res.data)
+            that.user = res.data
+            that.login = true
+          }
         },
         fail (err) {
           console.log(err)
@@ -67,40 +66,46 @@ export default {
 </script>
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .big-box {
+  width: 750rpx;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
-.header-card {
-  width: 100%;
-  height: 280rpx;
+.notice-box {
+  width: 750rpx;
+}
+.login-box {
+  width: 750rpx;
   padding: 40rpx 20rpx;
-  flex-wrap: nowrap;
-  background: white;
   box-sizing: border-box;
-}
-.header-img {
-  float: left;
-  width: 200rpx;
-  height: 200rpx;
-  border-radius: 20rpx;
-  overflow: hidden;
-  background: seagreen;
-}
-.header-img img {
-  width: 100%;
-  height: 100%;
-}
-.des-text {
-  float: left;
-  margin-left: 40rpx;
-}
-.des-text .item {
-  height: 100rpx;
+  background: #c7c7c7;
+
   display: flex;
+  flex-wrap: nowrap;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+}
+.login-box .login-img {
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  text-align: center;
+}
+.login-box .login-img img {
+  width: 100%;
+  height: 100%;
+}
+.login-box .user-detail{
+  font-size: 16px;
+  margin-left:30rpx; 
 }
 </style>

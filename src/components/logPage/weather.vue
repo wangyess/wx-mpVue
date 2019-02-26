@@ -41,7 +41,6 @@ export default {
     getWeatherData () {
       this.$http.get('https://www.apiopen.top/weatherApi?city=%E5%A4%A7%E8%BF%9E')
         .then((res) => {
-          console.log(res)
           this.city = res.data.city
           this.cityWeatherData = res.data.forecast
         })

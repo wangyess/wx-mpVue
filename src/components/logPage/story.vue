@@ -1,5 +1,20 @@
 <template>
   <div class="story">
+    <div class="search-box">
+      <van-search
+        :value=" searchValue "
+        placeholder="请输入搜索关键词"
+        use-action-slot
+        @search="onSearch"
+        @change="changdata"
+        @clear ="init"
+      >
+        <view
+          slot="action"
+          @tap="onSearch"
+        ><van-button type="primary" size="small">搜索</van-button></view>
+      </van-search>
+    </div>
     <div
       v-if='show'
       class="isshow"
@@ -40,14 +55,33 @@ export default {
   data () {
     return {
       show: true,
-      storyData: []
+      storyData: [],
+      searchValue: ''
     }
   },
   mounted () {
     this.getData()
   },
   methods: {
+    init () {
+      this.getData()
+    },
+    changdata (event) {
+      this.searchValue = event.mp.detail
+    },
+    onSearch (event) {
+      this.show = true
+      this.$http.get('https://www.apiopen.top/novelInfoApi?name=' + this.searchValue)
+        .then((res) => {
+          if (res) {
+            this.show = false
+            this.storyData = res.data.data
+          }
+        })
+        .catch((err) => console.log(err))
+    },
     getData () {
+      this.show = true
       this.$http.get('https://www.apiopen.top/novelApi')
         .then((res) => {
           if (res) {
@@ -62,6 +96,16 @@ export default {
 </script>
 
 <style>
+.search-box{
+  width: 730rpx;
+  box-sizing: border-box;
+}
+.search-box .van-search__action{
+  padding: 0px;
+}
+.search-box .van-search{
+  padding: 7px 0;
+}
 .isshow {
   width: 100%;
   padding-top: 300rpx;
@@ -73,6 +117,7 @@ export default {
 .story {
   width: 730rpx;
   margin: 10rpx 10rpx;
+  box-sizing: border-box;
 
   display: flex;
   flex-direction: row;
