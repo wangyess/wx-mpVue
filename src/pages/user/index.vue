@@ -1,20 +1,40 @@
 <template>
   <div class="big-box">
-
+    <!-- notice -->
     <div class="notice-box">
       <van-notice-bar text="有位非常漂亮的女同事，有天起晚了没有时间化妆便急忙冲到公司。结果那天她被记旷工了……吃惊" />
     </div>
-
+    <!-- login -->
     <div class="login-box">
       <div class="login-img">
-        <img v-show="!login"
+        <img
+          v-if="!login"
           src="../../../static/images/handao.jpg"
           alt=""
         >
-        <img v-show="login" :src="user.userDetail.avatarUrl" alt="">
+        <img
+          v-else
+          :src="user.userDetail.avatarUrl"
+          alt=""
+        >
       </div>
       <div class="user-detail">
-          <p @click="routerTo">登陆</p>
+        <p
+          v-if="!login"
+          @click="routerTo"
+        >登陆</p>
+        <p v-else>{{user.userDetail.nickName}}</p>
+      </div>
+    </div>
+    <!-- item -->
+    <div class="items-box">
+      <div class="item-card">
+        <van-cell-group>
+        <van-cell title="收货地址" icon="location-o" is-link url="../../pages/adress/main" link-type="navigateTo" />
+        <van-cell title="联系客服" icon="audio" is-link />
+        <van-cell title="关于我们" icon="friends-o" is-link />
+        <van-cell title="版本信息" icon="new-o" is-link />
+        </van-cell-group>
       </div>
     </div>
   </div>
@@ -44,7 +64,6 @@ export default {
         key: 'userData',
         success (res) {
           if (res) {
-            console.log(res.data)
             that.user = res.data
             that.login = true
           }
@@ -66,11 +85,6 @@ export default {
 </script>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 .big-box {
   width: 750rpx;
 
@@ -104,8 +118,16 @@ export default {
   width: 100%;
   height: 100%;
 }
-.login-box .user-detail{
+.login-box .user-detail {
   font-size: 16px;
-  margin-left:30rpx; 
+  font-weight: 500;
+  margin-left: 30rpx;
+}
+.items-box {
+  width: 750rpx;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 </style>

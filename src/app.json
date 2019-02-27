@@ -4,7 +4,9 @@
     "pages/index/main",
     "pages/logs/main",
     "pages/counter/main",
-    "pages/authorization/main"
+    "pages/authorization/main",
+    "pages/adress/main",
+    "pages/newAdress/main"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -12,7 +14,7 @@
     "navigationBarTitleText": "微信",
     "navigationBarTextStyle": "black",
     "backgroundColor": "#fff",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": false
   },
   "tabBar": {
     "color": "#999",
