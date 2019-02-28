@@ -7,12 +7,14 @@
         clearable
         label="收货人姓名"
         placeholder="姓名"
+        @change="inputName"
       />
       <van-field
         :value="phoneNumber"
         clearable
         label="手机号码"
         placeholder="11电话号码"
+        @change="inputPhone"
       />
       <van-field
         :value="theArea"
@@ -27,6 +29,7 @@
         clearable
         label="详细地址"
         placeholder="道路、小区、楼栋号、单元、室等"
+        @change="inputDetaileADD"
       />
     </van-cell-group>
 
@@ -54,12 +57,13 @@
       >保存新地址</van-button>
     </div>
 
+    <van-notify id="custom-selector" />
   </div>
 </template>
 
 <script>
 import area from '../../utils/area'
-
+import Notify from '../../../static/vant/notify/notify'
 export default {
   data () {
     return {
@@ -69,10 +73,24 @@ export default {
       detailAddress: '',
       show: false,
       areaList: area,
-      defaultValue: '110101'
+      defaultValue: '110101',
+      text: '',
+      addressArray: []
     }
   },
+  onShow () {
+    this.init()
+  },
   methods: {
+    inputName (event) {
+      this.consigneeName = event.mp.detail
+    },
+    inputPhone (event) {
+      this.phoneNumber = event.mp.detail
+    },
+    inputDetaileADD (event) {
+      this.detailAddress = event.mp.detail
+    },
     shows () {
       this.show = true
     },
@@ -89,11 +107,69 @@ export default {
     },
     routerTo () {
       if (this.consigneeName !== '' && this.phoneNumber !== '' && this.theArea !== '' && this.detailAddress !== '') {
-        this.$router.back()
+        let addressObject = {
+          'consigneeName': this.consigneeName,
+          'phoneNumber': this.phoneNumber,
+          'theArea': this.theArea,
+          'detailAddress': this.detailAddress,
+          'defaultValue': this.defaultValue
+        }
+        var that = this
+
+        let data = wx.getStorageSync('addressArray')
+        if (data.length > 0) {
+          that.addressArray = data
+        }
+
+        that.addressArray.push(addressObject)
+
+        wx.setStorage({
+          key: 'addressArray',
+          data: that.addressArray,
+          success: function (res) {
+            that.$router.back()
+          }
+        })
       } else {
-        // this.isShow = true
-        console.log('不行')
+        if (this.consigneeName === '') {
+          this.text = '收货人姓名不能为空'
+          this.promptMessage()
+          return
+        }
+        if (this.phoneNumber === '') {
+          this.text = '收货人电话不能为空'
+          this.promptMessage()
+          return
+        }
+        if (this.theArea === '') {
+          this.text = '所在区域不能为空'
+          this.promptMessage()
+          return
+        }
+        if (this.detailAddress === '') {
+          this.text = '详细地址不能为空'
+          this.promptMessage()
+        }
       }
+    },
+    promptMessage () {
+      Notify({
+        text: `${this.text}`,
+        duration: 2000,
+        selector: '#custom-selector',
+        backgroundColor: '#ababab'
+      })
+    },
+    init () {
+      this.consigneeName = ''
+      this.phoneNumber = ''
+      this.theArea = ''
+      this.detailAddress = ''
+      this.show = false
+      this.areaList = area
+      this.defaultValue = '110101'
+      this.text = ''
+      this.addressArray = []
     }
   }
 }

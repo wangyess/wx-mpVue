@@ -7,6 +7,7 @@
     "van-cell-group": "/static/vant/cell-group/index",
     "van-field": "/static/vant/field/index",
     "van-area": "/static/vant/area/index",
-    "van-popup": "/static/vant/popup/index"
+    "van-popup": "/static/vant/popup/index",
+    "van-notify": "/static/vant/notify/index"
   }
 }
