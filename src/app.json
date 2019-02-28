@@ -1,12 +1,13 @@
 {
   "pages": [
-    "pages/user/main",
     "pages/index/main",
+    "pages/user/main",
     "pages/logs/main",
     "pages/counter/main",
     "pages/authorization/main",
     "pages/adress/main",
-    "pages/newAdress/main"
+    "pages/newAdress/main",
+    "pages/version/main"
   ],
   "window": {
     "backgroundTextStyle": "dark",

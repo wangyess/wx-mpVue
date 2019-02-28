@@ -1,3 +1,8 @@
 {
-  "navigationBarTitleText": "雪中悍刀行"
+  "navigationBarTitleText": "雪中悍刀行",
+  "navigationBarBackgroundColor": "#494949",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "van-notice-bar": "/static/vant/notice-bar/index"
+  }
 }

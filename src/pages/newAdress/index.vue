@@ -12,6 +12,7 @@
       <van-field
         :value="phoneNumber"
         clearable
+        type="number"
         label="手机号码"
         placeholder="11电话号码"
         @change="inputPhone"

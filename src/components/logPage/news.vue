@@ -3,6 +3,7 @@
     <div
       class="newCard"
       v-for="(item, index) in news"
+      :key="index"
     >
       <div class="newImg">
         <img

@@ -73,7 +73,7 @@ export default {
 }
 .card-box {
   width: 100%;
-  height: 200rpx;
+  min-height: 200rpx;
   border-radius: 30rpx;
   background: white;
   margin-bottom: 40rpx;

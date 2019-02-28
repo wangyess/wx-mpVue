@@ -25,6 +25,7 @@
       v-if="!show"
       class="story-card"
       v-for="(story, index) in storyData"
+      :key= "index"
     >
       <div class="title">
         <p>{{story.bookname}}</p>

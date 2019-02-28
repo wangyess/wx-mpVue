@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "版本信息",
+  "navigationBarBackgroundColor": "#494949",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "van-cell": "/static/vant/cell/index",
+    "van-cell-group": "/static/vant/cell-group/index",
+    "van-toast": "/static/vant/toast/index"
+  }
+}

@@ -33,7 +33,7 @@
         <van-cell title="收货地址" icon="location-o" is-link url="../../pages/adress/main" link-type="navigateTo" />
         <van-cell title="联系客服" icon="audio" is-link />
         <van-cell title="关于我们" icon="friends-o" is-link />
-        <van-cell title="版本信息" icon="new-o" is-link />
+        <van-cell title="版本信息" icon="new-o" is-link  url="../../pages/version/main" link-type="navigateTo"/>
         </van-cell-group>
       </div>
     </div>

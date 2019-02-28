@@ -3,6 +3,7 @@
     <div
       class="weather-card"
       v-for="(item, index) in cityWeatherData"
+      :key= "index"
     >
       <div class="weather-title">
         <p>城市：<span>{{city}}</span></p>

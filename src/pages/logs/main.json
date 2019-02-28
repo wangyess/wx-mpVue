@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "大学龙骑军",
+  "navigationBarBackgroundColor": "#494949",
+  "navigationBarTextStyle": "white",
   "usingComponents": {
     "van-button": "/static/vant/button/index",
     "van-tab": "/static/vant/tab/index",
