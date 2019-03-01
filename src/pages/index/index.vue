@@ -10,10 +10,9 @@
     <div class="img-box">
       <div
         v-for="(item, index) in images"
-        :class="[ active === index && isActive === true ? 'diy' : 'back', 'img-card']"
-        :id="index"
+        class="img-card"
         :key="index"
-        @click="bigImg(index)"
+        @click="bigImg(item)"
       >
         <div class="img">
           <img
@@ -39,7 +38,12 @@
       </div>
     </div>
 
-    <!-- <van-popup show="{{ show }}" bind:close="onClose">内容</van-popup> -->
+    <van-popup :show="show" @close="onClose" duration="700">
+      <div class="clickImg" @click="onClose">
+         <img :src="url" alt="">
+      </div>
+      </van-popup>
+
   </div>
 </template>
 
@@ -55,8 +59,8 @@ export default {
       images: [],
       signature: [],
       zuoyouming: null,
-      active: '',
-      isActive: false
+      show: false,
+      url: ''
     }
   },
   onShareAppMessage: function (res) {
@@ -108,69 +112,25 @@ export default {
           console.log(err)
         })
     },
-    bigImg (event) {
-      this.isActive = !this.isActive
-      this.active = event
+    bigImg (item) {
+      this.url = item.url
+      console.log(this.url)
+      this.show = true
+    },
+    onClose () {
+      this.show = false
     }
   }
 }
 </script>
 
 <style scoped>
-@keyframes mymove {
-  from {
-    height: 430rpx !important;
-    width: 330rpx !important;
-  }
-  to {
-    height: 700rpx !important;
-    width: 1000rp0x !important;
-  }
-}
-@keyframes back {
-  from {
-    height: 700rpx !important;
-    width: 1000rpx !important;
-  }
-  to {
-    height: 430rpx !important;
-    width: 330rpx !important;
-  }
-}
-.diy {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: mymove 0.5s;
-  animation-fill-mode: forwards;
-  animation-timing-function: ease;
-
-  position: fixed !important;
-  top:80rpx;
-  bottom:0;
-  left: 0;
-  right: 0;
-  overflow:hidden;
-  z-index: 1000;
-  width: 700rpx !important;
-  height: 1000rpx !important;
-  margin: 0 auto;
-}
-.back {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: back 0.5s;
-  animation-fill-mode: forwards;
-  animation-timing-function: ease;
-}
 .row {
   width: 750rpx;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: space-around;
-  /* position: relative; */
 }
 .box-shadow {
   width: 100%;
@@ -183,8 +143,6 @@ export default {
   width: 100%;
   padding: 30rpx 30rpx;
   box-sizing: border-box;
-
-
 
   display: flex;
   flex-direction: row;
@@ -249,5 +207,15 @@ export default {
 }
 .user-des p {
   color: rgb(105, 105, 105);
+}
+.clickImg{
+  width: 650rpx;
+  height: 950rpx;
+  padding: 15rpx;
+  box-sizing: border-box;
+}
+.clickImg img{
+  width: 100%;
+  height:100%;
 }
 </style>
