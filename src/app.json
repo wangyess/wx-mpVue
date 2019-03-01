@@ -9,6 +9,11 @@
     "pages/newAdress/main",
     "pages/version/main"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "不给位置信息你就别用我们的小程序！叼不叼？就问你叼不叼"
+    }
+  },
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
