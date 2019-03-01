@@ -2,9 +2,9 @@ const indexPage = {
   namespaced: true,
   state: {
     zn_CH: true,
-    name: '王野',
-    age: '23',
-    sex: '男',
+    name: '卡丁猫',
+    age: '木有年龄',
+    sex: '中性',
     introduce: '签名',
     details: '用树去接触星辰是大地的渴望'
   },
@@ -15,11 +15,11 @@ const indexPage = {
   },
   mutations: {
     ChineseName (state) {
-      state.name = '王野'
+      state.name = '卡丁猫'
       state.zn_CH = true
     },
     EnglishName (state) {
-      state.name = 'wangye'
+      state.name = 'Cardin cat'
       state.zn_CH = false
     }
   },

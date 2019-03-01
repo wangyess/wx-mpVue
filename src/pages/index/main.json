@@ -3,6 +3,7 @@
   "navigationBarBackgroundColor": "#494949",
   "navigationBarTextStyle": "white",
   "usingComponents": {
-    "van-notice-bar": "/static/vant/notice-bar/index"
+    "van-notice-bar": "/static/vant/notice-bar/index",
+    "van-popup": "/static/vant/popup/index"
   }
 }

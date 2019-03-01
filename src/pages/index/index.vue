@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row" >
     <div class="box-shadow"></div>
 
     <van-notice-bar
@@ -9,9 +9,11 @@
 
     <div class="img-box">
       <div
-        class="img-card"
         v-for="(item, index) in images"
+        :class="[ active === index && isActive === true ? 'diy' : 'back', 'img-card']"
+        :id="index"
         :key="index"
+        @click="bigImg(index)"
       >
         <div class="img">
           <img
@@ -36,6 +38,8 @@
         </div>
       </div>
     </div>
+
+    <!-- <van-popup show="{{ show }}" bind:close="onClose">内容</van-popup> -->
   </div>
 </template>
 
@@ -50,7 +54,17 @@ export default {
       num: 1,
       images: [],
       signature: [],
-      zuoyouming: null
+      zuoyouming: null,
+      active: '',
+      isActive: false
+    }
+  },
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      return {
+        title: '悍刀行',
+        path: '/pages/index/main'
+      }
     }
   },
   computed: {
@@ -93,20 +107,70 @@ export default {
         .catch((err) => {
           console.log(err)
         })
+    },
+    bigImg (event) {
+      this.isActive = !this.isActive
+      this.active = event
     }
-
   }
 }
 </script>
 
 <style scoped>
+@keyframes mymove {
+  from {
+    height: 430rpx !important;
+    width: 330rpx !important;
+  }
+  to {
+    height: 700rpx !important;
+    width: 1000rp0x !important;
+  }
+}
+@keyframes back {
+  from {
+    height: 700rpx !important;
+    width: 1000rpx !important;
+  }
+  to {
+    height: 430rpx !important;
+    width: 330rpx !important;
+  }
+}
+.diy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: mymove 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease;
+
+  position: fixed !important;
+  top:80rpx;
+  bottom:0;
+  left: 0;
+  right: 0;
+  overflow:hidden;
+  z-index: 1000;
+  width: 700rpx !important;
+  height: 1000rpx !important;
+  margin: 0 auto;
+}
+.back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: back 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease;
+}
 .row {
   width: 750rpx;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: space-around;
-  position: relative;
+  /* position: relative; */
 }
 .box-shadow {
   width: 100%;
@@ -120,6 +184,8 @@ export default {
   padding: 30rpx 30rpx;
   box-sizing: border-box;
 
+
+
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -129,12 +195,14 @@ export default {
 .img-card {
   position: relative;
   width: 330rpx;
+  height: 430rpx;
+
   background: white;
   margin-bottom: 30rpx;
 }
 .img-card .img {
   width: 100%;
-  height: 430rpx;
+  height: 100%;
   text-align: center;
 }
 .img-card .img img {
